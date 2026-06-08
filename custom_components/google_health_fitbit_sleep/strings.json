@@ -28,7 +28,8 @@
     "step": {
       "init": {
         "data": {
-          "days_to_fetch": "Days of sleep history to fetch"
+          "days_to_fetch": "Days of sleep history to fetch",
+          "update_interval": "Update interval in minutes"
         }
       }
     }

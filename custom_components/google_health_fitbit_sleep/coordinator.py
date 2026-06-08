@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 from typing import Any
 
@@ -11,7 +11,13 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import GoogleHealthApi
-from .const import CONF_DAYS_TO_FETCH, DEFAULT_DAYS_TO_FETCH, DOMAIN, SCAN_INTERVAL
+from .const import (
+    CONF_DAYS_TO_FETCH,
+    CONF_UPDATE_INTERVAL,
+    DEFAULT_DAYS_TO_FETCH,
+    DEFAULT_UPDATE_INTERVAL,
+    DOMAIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -30,7 +36,12 @@ class GoogleHealthSleepCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             hass,
             _LOGGER,
             name=DOMAIN,
-            update_interval=SCAN_INTERVAL,
+            update_interval=timedelta(
+                minutes=entry.options.get(
+                    CONF_UPDATE_INTERVAL,
+                    DEFAULT_UPDATE_INTERVAL,
+                )
+            ),
         )
         self.api = api
         self.entry = entry

@@ -15,10 +15,14 @@ from homeassistant.helpers import config_entry_oauth2_flow
 
 from .const import (
     CONF_DAYS_TO_FETCH,
+    CONF_UPDATE_INTERVAL,
     DEFAULT_DAYS_TO_FETCH,
+    DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
     GOOGLE_HEALTH_API_BASE,
     MAX_DAYS_TO_FETCH,
+    MAX_UPDATE_INTERVAL,
+    MIN_UPDATE_INTERVAL,
     OAUTH2_SCOPES,
 )
 
@@ -94,7 +98,10 @@ class ConfigFlow(config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMA
         return self.async_create_entry(
             title="Google Health Sleep",
             data=data,
-            options={CONF_DAYS_TO_FETCH: DEFAULT_DAYS_TO_FETCH},
+            options={
+                CONF_DAYS_TO_FETCH: DEFAULT_DAYS_TO_FETCH,
+                CONF_UPDATE_INTERVAL: DEFAULT_UPDATE_INTERVAL,
+            },
         )
 
     async def _async_get_identity(self, data: dict[str, Any]) -> dict[str, Any]:
@@ -150,6 +157,15 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                             CONF_DAYS_TO_FETCH, DEFAULT_DAYS_TO_FETCH
                         ),
                     ): vol.All(vol.Coerce(int), vol.Range(min=1, max=MAX_DAYS_TO_FETCH)),
+                    vol.Required(
+                        CONF_UPDATE_INTERVAL,
+                        default=self._config_entry.options.get(
+                            CONF_UPDATE_INTERVAL, DEFAULT_UPDATE_INTERVAL
+                        ),
+                    ): vol.All(
+                        vol.Coerce(int),
+                        vol.Range(min=MIN_UPDATE_INTERVAL, max=MAX_UPDATE_INTERVAL),
+                    ),
                 }
             ),
         )
