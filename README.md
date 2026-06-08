@@ -67,3 +67,7 @@ Then restart Home Assistant.
 - Sleep records
 
 The `sleep_records` sensor includes recent normalized sleep records in attributes for dashboards, templates, and plotting.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
