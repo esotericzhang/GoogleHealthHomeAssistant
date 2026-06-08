@@ -1,0 +1,13 @@
+{
+  "domain": "google_health_fitbit_sleep",
+  "name": "Google Health Sleep",
+  "codeowners": ["@esotericzhang"],
+  "config_flow": true,
+  "dependencies": ["application_credentials"],
+  "documentation": "https://developers.google.com/health/setup",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/esotericzhang/GoogleHealthHomeAssistant/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

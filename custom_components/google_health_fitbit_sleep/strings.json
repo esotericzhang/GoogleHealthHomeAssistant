@@ -1,0 +1,70 @@
+{
+  "title": "Google Health Sleep",
+  "application_credentials": {
+    "description": "Create OAuth credentials in the [Google Cloud Console]({console_url}), enable the Google Health API using Google's [setup guide]({health_setup_url}), then enter the client ID and client secret here. Configure the OAuth redirect URI shown by Home Assistant in Google Cloud."
+  },
+  "config": {
+    "step": {
+      "pick_implementation": {
+        "title": "Pick authentication method"
+      },
+      "auth": {
+        "title": "Link Google Health"
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate Google Health",
+        "description": "Google Health Sleep needs to re-authenticate your account."
+      }
+    },
+    "abort": {
+      "already_configured": "This Google Health account is already configured.",
+      "cannot_connect": "Unable to connect to Google Health.",
+      "invalid_identity": "Unable to identify the Google Health account.",
+      "reauth_successful": "Re-authentication was successful.",
+      "wrong_account": "Please authenticate with the same Google Health account."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "days_to_fetch": "Days of sleep history to fetch"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "latest_minutes_asleep": {
+        "name": "Latest minutes asleep"
+      },
+      "latest_minutes_awake": {
+        "name": "Latest minutes awake"
+      },
+      "latest_sleep_period": {
+        "name": "Latest sleep period"
+      },
+      "latest_sleep_efficiency": {
+        "name": "Latest sleep efficiency"
+      },
+      "latest_deep_sleep": {
+        "name": "Latest deep sleep"
+      },
+      "latest_light_sleep": {
+        "name": "Latest light sleep"
+      },
+      "latest_rem_sleep": {
+        "name": "Latest REM sleep"
+      },
+      "latest_sleep_start": {
+        "name": "Latest sleep start"
+      },
+      "latest_sleep_end": {
+        "name": "Latest sleep end"
+      },
+      "sleep_records": {
+        "name": "Sleep records"
+      }
+    }
+  }
+}
